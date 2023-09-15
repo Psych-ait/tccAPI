@@ -30,9 +30,7 @@ export async function inserirCliente(cliente) {
         throw error;
     }
 }
-
 function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    const email1= /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return email1.test(email);
 }
-

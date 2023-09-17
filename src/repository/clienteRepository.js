@@ -34,3 +34,30 @@ function isValidEmail(email) {
     const email1= /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return email1.test(email);
 }
+
+export async function realizarLogin(email, senha) {
+    try {
+        if (!email || !senha) {
+            throw new Error('Email e senha são obrigatórios.');
+        }
+
+        const sql = `SELECT * FROM TB_Cliente WHERE ds_email = ?`;
+        const [rows] = await conexao.query(sql, [email]);
+
+        if (rows.length === 0) {
+            throw new Error('Cliente não encontrado.');
+        }
+
+        const cliente = rows[0];
+
+        if (senha !== cliente.ds_senha) {
+            throw new Error('Senha incorreta.');
+        }
+
+        return cliente;
+
+    } catch (error) {
+        console.error('Erro ao realizar o login:', error.message);
+        throw error;
+    }
+}

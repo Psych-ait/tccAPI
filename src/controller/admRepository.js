@@ -1,4 +1,4 @@
-import conexao from "./connection.js";
+import conexao from "../repository/connection.js";
 
 export async function realizarLoginAdm(email, senha) {
     try {
